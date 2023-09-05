@@ -1,0 +1,127 @@
+body{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100vh;
+    background-color:  #e8f1f2;
+}
+
+.main-container {
+    width: 360px;
+    height: 680px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: #13293d;
+    border: none;
+    border-radius: 12px;
+}
+
+.title {
+    color: #e8f1f2;
+    border: 1px solid #e8f1f2;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 4px 20px;
+    align-self: flex-end;
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.button {
+    width: 72px;
+    height: 84px;
+    margin-top: 4px;
+    background-color: #87bcde;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    
+}
+
+.button:active {
+    transform: scale(0.95);
+}
+
+#button-clear, #button-equal {
+    width: 148px;
+    height: 84px;
+    
+}
+
+.button.numbers {
+    margin-right: 4px;
+}
+
+#button-clear {
+    background-color: #f45d48;
+    color: #e8f1f2;
+}
+
+#button-delete {
+    background-color: #ffbf46;
+}
+
+#button-clear, #button-delete {
+    margin-right: 4px;
+}
+
+.button.operators {
+    background-color: #1b98e0;
+    color: #e8f1f2;
+}
+
+#button-equal {
+    background-color: #00438a;
+    color: #e8f1f2;
+}
+
+.displayContainer {
+    height: 100px;
+    width: 300px;
+    margin: 10px;
+    background-color: #e8f1f2;
+    border: 1px solid #131515;
+    border-radius: 8px;
+}
+
+.displaySecond, .displayMain {
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.displaySecond {
+    height: 40px;
+    justify-content: flex-start;
+    border-bottom: 1px solid #339989;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+.displayMain {
+    height: 60px;
+    justify-content: flex-end;
+    font-size: 20px;
+    font-weight: bold;
+}
