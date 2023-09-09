@@ -1,8 +1,9 @@
 let firstNumber = null;
-let operator = '';
+let operator = null;
 let secondNumber = null;
 let result = null;
 let isOperatorEntered = false;
+let isEqualEntered = false;
 
 const mainDisplay = document.querySelector('.displayMain');
 const secondDisplay = document.querySelector('.displaySecond');
@@ -22,7 +23,12 @@ addButton.addEventListener('click', () => inputOperator('+'));
 subtractButton.addEventListener('click', () => inputOperator('-'));
 multiplyButton.addEventListener('click', () => inputOperator('*'));
 divideButton.addEventListener('click', () => inputOperator('/'));
-equalButton.addEventListener('click', () => calculate());
+equalButton.addEventListener('click', () => {
+    calculate()
+    //TODO:
+    isEqualEntered = true;
+}
+    );
 
 const numbersArray = Array.from(numberButtons);
 numbersArray.forEach(numberButton => {
@@ -37,27 +43,29 @@ numbersArray.forEach(numberButton => {
 
 function inputNumber(number) {
 
-    if (!isOperatorEntered) {
-        if (firstNumber === null) {
-            firstNumber = number;
-        }
-        else {
-            firstNumber += number;
-        }
+if(isEqualEntered){
+    clear();
+    isEqualEntered = false;
 
-        secondDisplay.textContent = firstNumber;
+}
+if (!isOperatorEntered) {
+    if (firstNumber === null) {
+        firstNumber = number;
     }
     else {
-        if (secondNumber === null) {
-            secondNumber = number;
-        }
-        else {
-            secondNumber += number;
-        }
-
-        secondDisplay.textContent = `${firstNumber} ${operator} ${secondNumber}`;
+        firstNumber += number;
     }
 
+}
+else {
+    if (secondNumber === null) {
+        secondNumber = number;
+    }
+    else {
+        secondNumber += number;
+    }
+}
+    displayContent();
 }
 
 function inputOperator(op) {
@@ -65,35 +73,34 @@ function inputOperator(op) {
         isOperatorEntered = true;
         secondNumber = null;
         operator = op;
-        secondDisplay.textContent = `${firstNumber} ${operator}`;
     }
 
     if(firstNumber !== null && result !== null){
         isOperatorEntered = true;
+        isEqualEntered = false;
         firstNumber = result;
         secondNumber = null;
         operator = op;
-        secondDisplay.textContent = `${firstNumber} ${operator}`;
     }
-
+    displayContent();
 }
 
 function calculate() {
     switch (operator) {
         case '+':
-            result = parseInt(firstNumber) + parseInt(secondNumber);
+            result = parseFloat(firstNumber) + parseFloat(secondNumber);
             mainDisplay.textContent = result;
             break;
         case '-':
-            result = parseInt(firstNumber) - parseInt(secondNumber);
+            result = parseFloat(firstNumber) - parseFloat(secondNumber);
             mainDisplay.textContent = result;
             break;
         case '*':
-            result = parseInt(firstNumber) * parseInt(secondNumber);
+            result = parseFloat(firstNumber) * parseFloat(secondNumber);
             mainDisplay.textContent = result;
             break;
         case '/':
-            result = parseInt(firstNumber) / parseInt(secondNumber);
+            result = parseFloat(firstNumber) / parseFloat(secondNumber);
             mainDisplay.textContent = result;
             break;
     }
@@ -103,19 +110,53 @@ function clear() {
     secondDisplay.textContent = '';
     mainDisplay.textContent = '0';
     isOperatorEntered = false;
+    result = null;
     firstNumber = null;
+    operator = null;
     secondNumber = null;
 }
 
 function deleteLast(){
-    if(firstNumber !== null && secondNumber === null){
+    if(firstNumber !== null && operator === null && secondNumber === null){
         if(firstNumber.length > 1){
             firstNumber = firstNumber.slice(0,-1)
         }
         else{
             firstNumber = null;
         }
-        secondDisplay.textContent = firstNumber;
     }
+    if(firstNumber !== null && operator !== null && secondNumber === null){
+        operator = null;
+        isOperatorEntered = false;
+    }
+    if(firstNumber !== null && operator !== null && secondNumber !== null){
+        if(secondNumber.length > 1){
+            secondNumber = secondNumber.slice(0,-1)
+        }
+        else{
+            secondNumber = null;
+            isEqualEntered = false;
+        }
+    }
+    
+    displayContent();
+}
 
+function displayContent(){
+
+    let content = '';
+
+    if (firstNumber !== null){
+        content += firstNumber;
+    }
+    if (operator !== null){
+        content += ' '
+        content += operator;
+        
+    }
+    if (secondNumber !== null){
+        content += ' '
+        content += secondNumber;
+    }
+    secondDisplay.textContent = content;
 }
