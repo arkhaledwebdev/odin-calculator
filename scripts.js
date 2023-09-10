@@ -6,8 +6,8 @@ let isOperatorEntered = false;
 let isFloatEntered = false;
 let isEqualEntered = false;
 
-const NUMBERS = ['0','1','2','3','4','5','6','7','8','9']
-const OPERATORS = ['+','-','/','*']
+const NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+const OPERATORS = ['+', '-', '/', '*']
 
 const mainDisplay = document.querySelector('.displayMain');
 const secondDisplay = document.querySelector('.displaySecond');
@@ -51,31 +51,31 @@ numbersArray.forEach(numberButton => {
 
 })
 
-document.addEventListener('keydown',(event)=>{
+document.addEventListener('keydown', (event) => {
     const key = event.key;
 
-    if(NUMBERS.includes(key)){
+    if (NUMBERS.includes(key)) {
         inputNumber(key)
     }
 
-    if(OPERATORS.includes(key)){
+    if (OPERATORS.includes(key)) {
         inputOperator(key)
     }
 
-    if(key === '=' || key === 'Enter'){
+    if (key === '=' || key === 'Enter') {
         calculate()
         isEqualEntered = true;
     }
 
-    if(key === 'Backspace'){
+    if (key === 'Backspace') {
         deleteLast();
     }
 
-    if(key === 'Escape'){
+    if (key === 'Escape') {
         clear();
     }
 
-    if(key === '.'){
+    if (key === '.') {
         if (!isFloatEntered) {
             inputNumber('.');
             isFloatEntered = true;
@@ -168,7 +168,7 @@ function clear() {
 function deleteLast() {
     if (firstNumber !== null && operator === null && secondNumber === null) {
         if (firstNumber.length > 1) {
-            firstNumber = firstNumber.slice(0, -1)
+            firstNumber = firstNumber.slice(0, -1);
         }
         else {
             firstNumber = null;
@@ -178,9 +178,10 @@ function deleteLast() {
         operator = null;
         isOperatorEntered = false;
     }
-    if (firstNumber !== null && operator !== null && secondNumber !== null) {
+    if (firstNumber !== null && operator !== null && secondNumber !== null
+        && isEqualEntered === false) {
         if (secondNumber.length > 1) {
-            secondNumber = secondNumber.slice(0, -1)
+            secondNumber = secondNumber.slice(0, -1);
         }
         else {
             secondNumber = null;
@@ -210,22 +211,22 @@ function displayContent() {
     secondDisplay.textContent = content;
 }
 
-function formatFloat(number){
+function formatFloat(number) {
 
     const numberText = number.toString();
     let formattedText = '';
 
-    if(numberText.includes('.')){
+    if (numberText.includes('.')) {
         const decimalPart = numberText.split('.')[1];
 
-        if(decimalPart.length > 3){
+        if (decimalPart.length > 3) {
             formattedText = number.toFixed(3);
         }
-        else{
+        else {
             formattedText = number;
         }
     }
-    else{
+    else {
         formattedText = number;
     }
 
